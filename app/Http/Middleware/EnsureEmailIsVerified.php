@@ -17,7 +17,7 @@ class EnsureEmailIsVerified
     public function handle(Request $request, Closure $next)
     {
         if($request->user() && !$request->user()->hasVerifiedEmail() && !$request->is('email/*','logout')) {
-            
+
             return $request->expectsJson()?abort(403,'Your mail address is not verified.'):redirect()->route('verification.notice');
         }
 
